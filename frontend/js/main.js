@@ -18,7 +18,6 @@ let $form, $statusMsg,
 
 document.addEventListener('DOMContentLoaded', () => {
   resolveRefs();
-  fetchDeadline();
   initDropZone();
   initValidationListeners();
   $form.addEventListener('submit', handleSubmit);
@@ -29,7 +28,6 @@ function resolveRefs() {
   $statusMsg     = document.getElementById('statusMsg');
   $studentName   = document.getElementById('studentName');
   $studentId     = document.getElementById('studentId');
-  $studentEmail  = document.getElementById('studentEmail');
   $dropZone      = document.getElementById('dropZone');
   $fileInput     = document.getElementById('fileInput');
   $fileChip      = document.getElementById('fileChip');
@@ -39,29 +37,9 @@ function resolveRefs() {
   $submitBtn     = document.getElementById('submitBtn');
   $btnSpinner    = $submitBtn.querySelector('.btn-spinner');
   $btnText       = $submitBtn.querySelector('.btn-text');
-  $deadlineValue = document.getElementById('deadlineValue');
 }
 
-async function fetchDeadline() {
-  if (!$deadlineValue) return;
 
-  try {
-    const res  = await fetch(`${CONFIG.apiBase}/deadline`);
-    const data = await res.json();
-    const dt   = new Date(data.deadline);
-
-    $deadlineValue.textContent = dt.toLocaleDateString('en-US', {
-      month:  'short',
-      day:    'numeric',
-      year:   'numeric',
-    }) + ' · ' + dt.toLocaleTimeString('en-US', {
-      hour:   '2-digit',
-      minute: '2-digit',
-    });
-  } catch {
-    if ($deadlineValue) $deadlineValue.textContent = 'See course syllabus';
-  }
-}
 
 function initDropZone() {
   $dropZone.addEventListener('click', (e) => {
@@ -126,8 +104,7 @@ window.removeFile = removeFile;
 
 const VALIDATORS = {
   studentName:  (v) => v.trim().length >= 2            || 'Please enter your full name.',
-  studentId:    (v) => /^[A-Za-z0-9]{4,15}$/.test(v.trim()) || 'Enter a valid student ID (4–15 chars).',
-  studentEmail: (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || 'Enter a valid email address.',
+  studentId: (v) => /^[A-Za-z0-9\/\-_]{4,20}$/.test(v.trim()) || 'Enter a valid student ID.',
 };
 
 function initValidationListeners() {
@@ -177,7 +154,6 @@ async function handleSubmit(e) {
   const formData = new FormData();
   formData.append('student_name',  $studentName.value.trim());
   formData.append('student_id',    $studentId.value.trim());
-  formData.append('student_email', $studentEmail.value.trim());
   formData.append('file',          state.file);
 
   try {
@@ -214,8 +190,22 @@ function handleSuccess(data) {
       'late'
     );
   }
-  removeFile();
+
   $fileInput.value = '';
+  state.file = null;
+
+  $chipIcon.textContent = '✅';
+  $chipSize.textContent = 'Submitted successfully';
+  $chipName.style.color = 'var(--c-green)';
+
+  const removeBtn = $fileChip.querySelector('.chip-remove');
+  if (removeBtn) removeBtn.style.display = 'none';
+
+  $studentName.disabled = true;
+  $studentId.disabled   = true;
+  $submitBtn.disabled   = true;
+  $submitBtn.style.opacity = '0.5';
+  $submitBtn.style.cursor  = 'not-allowed';
 }
 
 function setLoading(isLoading) {

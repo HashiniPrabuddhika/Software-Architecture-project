@@ -1,4 +1,4 @@
-DEADLINE        = "2024-05-10 23:59:00"
+DEADLINE        = "2025-05-10 23:59:00"
 
 UPLOAD_FOLDER = r"D:\8 Sem\software achitecture\assignment-monitor\nifi-data\submissions"
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Assignment Submission Portal</title>
-<link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <link rel="icon" href="data:,">
+  <title>Assignment Submission Portal</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
@@ -18,7 +19,7 @@
 
     <div class="card-header">
       <div class="card-eyebrow">Assignment Submission</div>
-      <h1 class="card-title">Submit Your <em>Coursework</em></h1>
+      <h1 class="card-title">Submit Your <em>Assignment</em></h1>
     </div>
 
     <div class="card-body">
@@ -45,7 +46,7 @@
             type="text"
             id="studentId"
             class="field-input"
-            placeholder="EG20201234">
+            placeholder="EG/2020/4119">
           <div id="studentIdErr" class="field-error"></div>
         </div>
 
@@ -54,21 +55,10 @@
         </label>
 
         <div class="drop-zone" id="dropZone">
-          <input
-            type="file"
-            id="fileInput"
-            accept=".pdf,.docx,.zip">
-
+          <input type="file" id="fileInput" accept=".pdf,.docx,.zip">
           <div class="drop-icon-wrap">📤</div>
-
-          <div class="drop-main-text">
-            Drag file here or click to upload
-          </div>
-
-          <div class="drop-sub-text">
-            Maximum 20 MB
-          </div>
-
+          <div class="drop-main-text">Drag file here or click to upload</div>
+          <div class="drop-sub-text">Maximum 20 MB</div>
           <div class="drop-formats">
             <span class="format-tag">PDF</span>
             <span class="format-tag">DOCX</span>
@@ -80,34 +70,20 @@
 
         <div class="file-chip" id="fileChip">
           <div class="chip-icon" id="chipIcon">📄</div>
-
           <div class="chip-meta">
             <div id="chipName" class="chip-name"></div>
             <div id="chipSize" class="chip-size"></div>
           </div>
-
-          <button
-            type="button"
-            class="chip-remove"
-            onclick="removeFile()">
-            ✕
-          </button>
+          <button type="button" class="chip-remove" onclick="removeFile()">✕</button>
         </div>
 
         <div id="statusMsg" class="status-msg"></div>
 
-        <button
-          type="submit"
-          id="submitBtn"
-          class="btn-submit">
-
+        <button type="submit" id="submitBtn" class="btn-submit">
           <span class="btn-inner">
             <span class="btn-spinner"></span>
-            <span class="btn-text">
-              Submit Assignment
-            </span>
+            <span class="btn-text">Submit Assignment</span>
           </span>
-
         </button>
 
       </form>
@@ -125,6 +101,5 @@
 </div>
 
 <script src="js/main.js"></script>
-
 </body>
 </html>
