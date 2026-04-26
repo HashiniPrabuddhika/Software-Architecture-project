@@ -6,7 +6,6 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
   const file    = document.getElementById('fileInput').files[0];
   const msg     = document.getElementById('statusMsg');
 
-  // Reset status
   msg.className = '';
   msg.textContent = 'Uploading...';
   msg.style.display = 'block';
