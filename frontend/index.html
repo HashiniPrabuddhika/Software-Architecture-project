@@ -1,30 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Assignment Submission Portal</title>
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<title>Assignment Submission Portal</title>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Assignment Submission</h1>
-    <p class="subtitle">Submit your assignment before the deadline</p>
 
-    <form id="uploadForm">
-      <label>Full Name</label>
-      <input type="text" id="studentName" placeholder="e.g. Kamal Perera" required>
+<div class="container">
 
-      <label>Student ID</label>
-      <input type="text" id="studentId" placeholder="e.g. EG/2020/xxxx" required>
-
-      <label>Assignment File (PDF, DOCX, or ZIP)</label>
-      <input type="file" id="fileInput" accept=".pdf,.docx,.zip" required>
-
-      <button type="submit">Submit Assignment</button>
-    </form>
-
-    <div id="statusMsg"></div>
+  <div class="brand">
+    <div class="brand-icon">🎓</div>
+    <div class="brand-name">EduMaster</div>
   </div>
-  <script src="js/main.js"></script>
+
+  <div class="card">
+
+    <div class="card-header">
+      <div class="card-eyebrow">Assignment Submission</div>
+      <h1 class="card-title">Submit Your <em>Coursework</em></h1>
+    </div>
+
+    <div class="card-body">
+
+      <form id="uploadForm">
+
+        <div class="field">
+          <label class="field-label">
+            Full Name <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="studentName"
+            class="field-input"
+            placeholder="Kamal Perera">
+          <div id="studentNameErr" class="field-error"></div>
+        </div>
+
+        <div class="field">
+          <label class="field-label">
+            Student ID <span class="required">*</span>
+          </label>
+          <input
+            type="text"
+            id="studentId"
+            class="field-input"
+            placeholder="EG20201234">
+          <div id="studentIdErr" class="field-error"></div>
+        </div>
+
+        <label class="field-label">
+          Assignment File <span class="required">*</span>
+        </label>
+
+        <div class="drop-zone" id="dropZone">
+          <input
+            type="file"
+            id="fileInput"
+            accept=".pdf,.docx,.zip">
+
+          <div class="drop-icon-wrap">📤</div>
+
+          <div class="drop-main-text">
+            Drag file here or click to upload
+          </div>
+
+          <div class="drop-sub-text">
+            Maximum 20 MB
+          </div>
+
+          <div class="drop-formats">
+            <span class="format-tag">PDF</span>
+            <span class="format-tag">DOCX</span>
+            <span class="format-tag">ZIP</span>
+          </div>
+        </div>
+
+        <div id="fileErr" class="field-error"></div>
+
+        <div class="file-chip" id="fileChip">
+          <div class="chip-icon" id="chipIcon">📄</div>
+
+          <div class="chip-meta">
+            <div id="chipName" class="chip-name"></div>
+            <div id="chipSize" class="chip-size"></div>
+          </div>
+
+          <button
+            type="button"
+            class="chip-remove"
+            onclick="removeFile()">
+            ✕
+          </button>
+        </div>
+
+        <div id="statusMsg" class="status-msg"></div>
+
+        <button
+          type="submit"
+          id="submitBtn"
+          class="btn-submit">
+
+          <span class="btn-inner">
+            <span class="btn-spinner"></span>
+            <span class="btn-text">
+              Submit Assignment
+            </span>
+          </span>
+
+        </button>
+
+      </form>
+
+    </div>
+
+    <div class="card-footer">
+      Secure Upload
+      <span class="card-footer-dot"></span>
+      NiFi Routing Enabled
+    </div>
+
+  </div>
+
+</div>
+
+<script src="js/main.js"></script>
+
 </body>
 </html>
